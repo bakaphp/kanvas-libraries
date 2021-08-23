@@ -4,14 +4,14 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use Canvas\Models\FileSystem;
 use IntegrationTester;
+use Kanvas\Packages\Social\Distributions;
+use Kanvas\Packages\Social\Enums\Interactions as EnumsInteractions;
+use Kanvas\Packages\Social\Interactions;
+use Kanvas\Packages\Social\Messages as MessagesService;
+use Kanvas\Packages\Social\MessageTypes;
 use Kanvas\Packages\Social\Models\Channels;
-use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
 use Kanvas\Packages\Social\Models\Messages;
-use Kanvas\Packages\Social\Services\Distributions;
-use Kanvas\Packages\Social\Services\Interactions;
-use Kanvas\Packages\Social\Services\Messages as MessagesService;
-use Kanvas\Packages\Social\Services\MessageTypes;
-use Kanvas\Packages\Social\Services\Reactions;
+use Kanvas\Packages\Social\Reactions;
 use Kanvas\Packages\Test\Support\Models\Lead;
 use Kanvas\Packages\Test\Support\Models\MessageObject;
 use Kanvas\Packages\Test\Support\Models\Users;
@@ -227,7 +227,7 @@ class MessagesCest
     public function messageInteraction(IntegrationTester $I) : void
     {
         $I->assertFalse(
-            Interactions::add(Users::findFirst(1), $this->message, ModelsInteractions::REACT)
+            Interactions::add(Users::findFirst(1), $this->message, EnumsInteractions::REACT)
         );
     }
 

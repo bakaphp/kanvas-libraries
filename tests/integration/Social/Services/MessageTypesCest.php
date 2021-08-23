@@ -3,8 +3,8 @@
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
+use Kanvas\Packages\Social\MessageTypes;
 use Kanvas\Packages\Social\Models\MessageTypes as ModelsMessageTypes;
-use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class MessageTypesCest

@@ -4,7 +4,7 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Reactions as ModelsReactions;
-use Kanvas\Packages\Social\Services\Reactions;
+use Kanvas\Packages\Social\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class ReactionsCest

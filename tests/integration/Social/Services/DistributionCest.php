@@ -3,10 +3,10 @@
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
+use Kanvas\Packages\Social\Distributions;
 use Kanvas\Packages\Social\Models\ChannelMessages;
 use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
 use Kanvas\Packages\Social\Models\Messages;
-use Kanvas\Packages\Social\Services\Distributions;
 use Kanvas\Packages\Test\Support\Models\App;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Phalcon\Security\Random;

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Providers;
 
-use Kanvas\Packages\Social\EventsManager;
+use Canvas\EventsManager;
 use Kanvas\Packages\Social\Listener\Users;
 use Phalcon\Di\DiInterface;
 use Phalcon\Di\ServiceProviderInterface;

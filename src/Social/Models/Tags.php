@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contracts\Interactions\FollowableInterface;
-use Kanvas\Packages\Social\Contracts\Interactions\FollowersTrait;
+use Kanvas\Packages\Social\Contracts\Follows\FollowableInterface;
+use Kanvas\Packages\Social\Contracts\Follows\FollowersTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\EntityInteractionsTrait;
 
 class Tags extends BaseModel implements FollowableInterface
 {
     use FollowersTrait;
+    use EntityInteractionsTrait;
 
     public $id;
     public int $apps_id;

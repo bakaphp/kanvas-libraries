@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
+use Baka\Contracts\Auth\UserInterface;
+use Canvas\Contracts\EventManagerAwareTrait;
+use Phalcon\Mvc\ModelInterface;
 
 class UsersInteractions extends BaseModel
 {
-    use TotalInteractionsTrait {
-        getInteractionStorageKey as protected parentGetInteractionStorageKey;
-    }
+    use EventManagerAwareTrait;
+
 
     public int $users_id;
     public int $entity_id;
@@ -55,12 +56,53 @@ class UsersInteractions extends BaseModel
     }
 
     /**
-     * Get the interaction key.
+     * Given the entity and its interaction check if user interact with it.
      *
-     * @return string
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     * @param Interactions $interaction
+     *
+     * @return self|null
      */
-    protected function getInteractionStorageKey() : string
+    public static function getByEntityInteraction(UserInterface $user, ModelInterface $entity, Interactions $interaction) : ?self
     {
-        return $this->entity_namespace . '-' . $this->entity_id . '-' . $this->interactions_id;
+        return self::findFirst([
+            'conditions' => 'users_id = :userId: 
+                                AND interactions_id = :interactionId: 
+                                AND entity_namespace = :namespace: 
+                                AND entity_id = :entityId:',
+            'bind' => [
+                'userId' => $user->getId(),
+                'interactionId' => $interaction->getId(),
+                'namespace' => get_class($entity),
+                'entityId' => $entity->getId(),
+            ]
+        ]);
+    }
+
+    /**
+     * After create.
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        if (method_exists(get_parent_class($this), 'afterCreate')) {
+            parent::afterCreate();
+        }
+        $this->fire('kanvas.social.interactions:afterCreate', $this);
+    }
+
+    /**
+     * After create.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        if (method_exists(get_parent_class($this), 'afterSave')) {
+            parent::afterSave();
+        }
+        $this->fire('kanvas.social.interactions:afterSave', $this);
     }
 }

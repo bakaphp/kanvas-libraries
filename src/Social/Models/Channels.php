@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
+
+use Baka\Support\Str;
 
 class Channels extends BaseModel
 {
@@ -34,6 +37,20 @@ class Channels extends BaseModel
                 'reusable' => true
             ]
         );
+    }
+
+    /**
+     * Before create.
+     *
+     * @return void
+     */
+    public function beforeCreate()
+    {
+        parent::beforeCreate();
+
+        if (empty($this->slug)) {
+            $this->slug = Str::slug($this->name);
+        }
     }
 
     /**

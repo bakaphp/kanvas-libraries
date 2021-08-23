@@ -5,8 +5,8 @@ namespace Kanvas\Packages\Social\Models;
 
 class Interactions extends BaseModel
 {
-    public $id;
-    public string $name;
+    public ?string $name = null;
+    public ?string $title = null;
     public ?string $icon = null;
 
     const REACT = 1;
@@ -35,6 +35,29 @@ class Interactions extends BaseModel
                 'reusable' => true,
             ]
         );
+    }
+
+    /**
+     * Get the interaction by name.
+     *
+     * @param string $interaction
+     *
+     * @return self
+     */
+    public static function getByName(string $name) : self
+    {
+        $name = strtolower(trim($name));
+
+        return self::findFirstOrCreate([
+            'conditions' => 'name = :name: and is_deleted = 0',
+            'bind' => [
+                'name' => $name,
+            ],
+
+        ], [
+            'name' => $name,
+            'title' => $name,
+        ]);
     }
 
     /**

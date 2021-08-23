@@ -11,8 +11,7 @@ use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
-use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\EntityInteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Jobs\ElasticMessages;
@@ -20,8 +19,7 @@ use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
-    use CustomTotalInteractionsTrait;
-    use InteractionsTrait;
+    use EntityInteractionsTrait;
     use FileSystemModelTrait;
     use ElasticIndexModelTrait;
     use CustomFieldsTrait;

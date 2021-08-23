@@ -4,14 +4,14 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use Canvas\Models\SystemModules;
 use IntegrationTester;
-use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
+use Kanvas\Packages\Social\Comments;
+use Kanvas\Packages\Social\Enums\Interactions as EnumsInteractions;
+use Kanvas\Packages\Social\Interactions;
+use Kanvas\Packages\Social\Messages as MessagesService;
+use Kanvas\Packages\Social\MessageTypes;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
-use Kanvas\Packages\Social\Services\Comments;
-use Kanvas\Packages\Social\Services\Interactions;
-use Kanvas\Packages\Social\Services\Messages as MessagesService;
-use Kanvas\Packages\Social\Services\MessageTypes;
-use Kanvas\Packages\Social\Services\Reactions;
+use Kanvas\Packages\Social\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class CommentsCest
@@ -159,8 +159,10 @@ class CommentsCest
      */
     public function messageInteraction(IntegrationTester $I) : void
     {
+        $user = Users::findFirst(1);
+
         $I->assertFalse(
-            Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT)
+            Interactions::add($user, $this->comment, EnumsInteractions::REACT)
         );
     }
 
