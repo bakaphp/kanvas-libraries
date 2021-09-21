@@ -350,6 +350,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function afterSave()
     {
         $this->associateFileSystem();
+        $this->clearFileSystemCache();
         ElasticMessages::dispatch($this);
 
         if ($this->hasParent()) {
